@@ -2,8 +2,20 @@ import { useState } from 'react'
 
 // a proper place to define a component
 const Statistics = (props) => {
+  if (props.all === 0) {
+    return (
+      <div>No feedback given</div>
+    )
+  }
   return (
-    <div>{props.name} {props.value}</div>
+    <div>
+      <div>good {props.good}</div>
+      <div>neutral {props.neutral}</div>
+      <div>bad {props.bad}</div>
+      <div>all {props.all}</div>
+      <div>average {props.average}</div>
+      <div>positive {props.positive}</div>
+    </div>
   )
 }
 
@@ -43,12 +55,7 @@ const App = () => {
       <button onClick={handleNeutral}>neutral</button>
       <button onClick={handleBad}>bad</button>
       <h1>statistics</h1>
-      <Statistics name='good' value={good}/>
-      <Statistics name='neutral' value={neutral}/>
-      <Statistics name='bad' value={bad}/>
-      <Statistics name='all' value={all}/>
-      <Statistics name='average' value={average}/>
-      <Statistics name='positive' value={positive}/>
+      <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positive={positive}/>
     </div>
   )
 }
