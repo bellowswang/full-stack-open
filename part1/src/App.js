@@ -2,7 +2,10 @@ import { useState } from 'react'
 
 const Statisticsline = (props) => {
   return (
-    <div>{props.name} {props.value}</div>
+    <tr>
+      <td>{props.name}</td>
+      <td>{props.value}</td>
+    </tr>
   )
 }
 
@@ -14,14 +17,16 @@ const Statistics = (props) => {
     )
   }
   return (
-    <div>
-      <Statisticsline name='good' value={props.good}/>
-      <Statisticsline name='neutral' value={props.neutral}/>
-      <Statisticsline name='bad' value={props.bad}/>
-      <Statisticsline name='all' value={props.all}/>
-      <Statisticsline name='average' value={props.average}/>
-      <Statisticsline name='positive' value={props.positive}/>
-    </div>
+    <table>
+      <tbody>
+        <Statisticsline name='good' value={props.good}/>
+        <Statisticsline name='neutral' value={props.neutral}/>
+        <Statisticsline name='bad' value={props.bad}/>
+        <Statisticsline name='all' value={props.all}/>
+        <Statisticsline name='average' value={props.average}/>
+        <Statisticsline name='positive' value={props.positive}/>
+      </tbody>
+    </table>
   )
 }
 
