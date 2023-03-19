@@ -20,8 +20,8 @@ const Course = (props) => {
         const { parts } = props
         return (
             <div>
-                {parts.map((cr, i) =>
-                    <Part key={i} part={cr.name} exercise={cr.exercises} />
+                {parts.map((cr) =>
+                    <Part key={cr.id} part={cr.name} exercise={cr.exercises} />
                 )}
             </div>
         )
@@ -44,14 +44,9 @@ const Course = (props) => {
 
     return (
         <div>
-            <h1>Web development curriculum</h1>
-            {courses.map((course, j, k, l) =>
-                <div>
-                    <Header key={j} name={course.name} />
-                    <Content key={k} parts={course.parts} />
-                    <Total key={l} parts={course.parts} />
-                </div>
-            )}
+            <Header name={courses.name} />
+            <Content parts={courses.parts} />
+            <Total parts={courses.parts} />
         </div>
     )
 }
