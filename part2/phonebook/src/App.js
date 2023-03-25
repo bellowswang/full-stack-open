@@ -14,9 +14,12 @@ const App = () => {
     }
 
     console.log('button clicked', event.target)
-
-    setPersons(persons.concat(personObject))
-    setNewName('')
+    if (persons.find(e => e.name === newName)) {
+      alert(`${newName} is already added to phoenbook`)
+    } else {
+      setPersons(persons.concat(personObject))
+      setNewName('')
+    }
   }
 
   const handlePersonChange = (event) => {
