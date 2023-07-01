@@ -14,8 +14,16 @@ const remove = id => {
     return axios.delete(baseUrl + '/' + id)
 }
 
+const update = (id, name, num) => {
+    return axios.put(baseUrl + '/' + id, {
+        name: name,
+        number: num
+    })
+}
+
 export default {
     getAll: getAll,
     create: create,
-    remove: remove
+    remove: remove,
+    update: update
 }

@@ -26,8 +26,18 @@ const App = () => {
     }
 
     console.log('button clicked', event.target)
-    if (persons.find(e => e.name === newName)) {
-      alert(`${newName} is already added to phoenbook`)
+
+    const person = persons.find(e => e.name === newName)
+    if (person) {
+      if (window.confirm(newName + ' is already added to phonebook, replace the old number with a new one')) {
+        personService
+        .update(person.id, person.name, newNumber)
+        .then(response => {
+          setNewName('')
+          setNewNumber('')
+          console.log(response)
+        })
+      }
     } else {
       personService
       .create(personObject)
