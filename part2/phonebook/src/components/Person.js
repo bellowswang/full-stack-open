@@ -1,7 +1,6 @@
 const PersonChild = (props) => {
-    const { person } = props
     return (
-        <div>{person.name} {person.number}</div>
+        <div>{props.person.name} {props.person.number} <button onClick={() => props.deletePerson(props.person.id)}>delete</button></div>
     )
 }
 
@@ -10,7 +9,7 @@ const Person = (props) =>{
     return (
         <div>
             {personsFiltered.map(person =>
-                <PersonChild key={person.name} person={person} />)}
+                <PersonChild key={person.name} person={person} deletePerson={props.deletePerson} />)}
         </div>
     )
 }
