@@ -16,7 +16,7 @@ const App = () => {
       .then(response => {
         setPersons(response.data)
       })
-  }, [])
+  }, [persons])
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -37,6 +37,20 @@ const App = () => {
         setNewNumber('')
         console.log(response)
       })
+    }
+  }
+
+  const deletePerson = (id) => {
+    const person = persons.find(n => n.id === id)
+    if (window.confirm('Delete ' + person.name)) {
+        personService
+        .remove(id)
+        .then(response => {
+          console.log(person)
+          setPersons(persons.filter(n => n.id !== id))
+          console.log(persons)
+          console.log(response)
+        })
     }
   }
 
@@ -71,7 +85,10 @@ const App = () => {
         addPerson={addPerson} />
       <h2>Numbers</h2>
       <div>
-        <Person persons={persons} newFilter={newFilter.toLowerCase()} />
+        <Person
+          persons={persons}
+          newFilter={newFilter.toLowerCase()}
+          deletePerson={deletePerson} />
       </div>
     </div>
   )
