@@ -25,19 +25,18 @@ const App = () => {
       number: newNumber
     }
 
-    axios
-      .post('http://localhost:3001/persons', personObject)
-      .then(response => {
-        console.log(response)
-      })
-
     console.log('button clicked', event.target)
     if (persons.find(e => e.name === newName)) {
       alert(`${newName} is already added to phoenbook`)
     } else {
-      setPersons(persons.concat(personObject))
-      setNewName('')
-      setNewNumber('')
+      axios
+      .post('http://localhost:3001/persons', personObject)
+      .then(response => {
+        setPersons(persons.concat(personObject))
+        setNewName('')
+        setNewNumber('')
+        console.log(response)
+      })
     }
   }
 
