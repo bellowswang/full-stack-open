@@ -16,7 +16,7 @@ const App = () => {
       .then(response => {
         setPersons(response.data)
       })
-  }, [persons])
+  }, [])
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -46,6 +46,11 @@ const App = () => {
         setNewName('')
         setNewNumber('')
         console.log(response)
+        personService
+        .getAll('http://localhost:3001/persons')
+        .then(response => {
+          setPersons(response.data)
+        })
       })
     }
   }
