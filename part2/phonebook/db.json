@@ -22,23 +22,8 @@
     },
     {
       "name": "test",
-      "number": "362321",
+      "number": "145",
       "id": 5
-    },
-    {
-      "name": "asdfdsa",
-      "number": "135",
-      "id": 7
-    },
-    {
-      "name": "testtest",
-      "number": "123",
-      "id": 8
-    },
-    {
-      "name": "testtesttest",
-      "number": "123",
-      "id": 9
     }
   ]
 }
