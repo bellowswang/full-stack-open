@@ -6,26 +6,31 @@ import Country from './components/Country'
 function App() {
   const [newFilter, setNewFilter] = useState('')
   const [countries, setCountries] = useState([])
+  const [showCountry, setShowCountry] = useState({})
 
   useEffect(() => {
     countryService
       .getAll()
       .then(response => {
         setCountries(response.data)
-        console.log(countries)
       })
   }, [])
 
   const handleFilterChange = (event) => {
     console.log(event.target.value)
     setNewFilter(event.target.value)
+    setShowCountry({})
   }
 
   return (
     <div>
       <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} />
       <div>
-        <Country countries={countries} newFilter={newFilter.toLowerCase()}/>
+        <Country
+          countries={countries}
+          newFilter={newFilter.toLowerCase()}
+          showCountry={showCountry}
+          setShowCountry={setShowCountry}/>
       </div>
     </div>
   );
