@@ -3,12 +3,15 @@ import Person from './components/Person'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import personService from './services/persons'
+import Notification from './components/Alert'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [errorStyle, setErrorStyle] = useState('serror')
 
   useEffect(() => {
     personService
@@ -36,7 +39,29 @@ const App = () => {
           setNewName('')
           setNewNumber('')
           console.log(response)
+          personService
+          .getAll('http://localhost:3001/persons')
+          .then(response => {
+            setPersons(response.data)
+          })
         })
+        .catch(error => {
+          setErrorStyle(
+            'unserror'
+          )
+          setErrorMessage(
+            'Information of ' + newName + ' has already been removed from server'
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
+          personService
+          .getAll('http://localhost:3001/persons')
+          .then(response => {
+            setPersons(response.data)
+          })
+        }
+        )
       }
     } else {
       personService
@@ -53,6 +78,13 @@ const App = () => {
         })
       })
     }
+
+    setErrorMessage(
+      'Added ' + newName
+    )
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 5000)
   }
 
   const deletePerson = (id) => {
@@ -61,9 +93,7 @@ const App = () => {
         personService
         .remove(id)
         .then(response => {
-          console.log(person)
           setPersons(persons.filter(n => n.id !== id))
-          console.log(persons)
           console.log(response)
         })
     }
@@ -87,6 +117,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} success={errorStyle} />
       <Filter
         newFilter={newFilter}
         handleFilterChange={handleFilterChange}
