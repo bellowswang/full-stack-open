@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import Weather from './Weather'
 
 const CountryChild = ({ country, setShowCountry }) => {
+    const countryName = country.name.common
     return (
-        <div> {country.name.common} <button onClick={() => setShowCountry(country)}>show</button> </div>
+        <div> {countryName} <button onClick={() => setShowCountry(country)}>show</button> </div>
     )
 }
 
@@ -19,15 +20,27 @@ const LanguageBulletPoints = ({ data }) => {
 };
 
 const CountryProfile = ({ country }) => {
+    const countryName = country.name.common
+    const capital = country.capital
+    const countryArea = country.area
+    const countryLanguage = country.languages
+    const countryFlagPng = country.flags.png
+    const countryCapital = country.capital
+    const countryCapitalLat = country.capitalInfo.latlng[0]
+    const countryCapitalLon = country.capitalInfo.latlng[1]
     return (
         <div>
-            <h1> {country.name.common} </h1>
-            <div> capital {country.capital} </div>
-            <div> area {country.area} </div>
+            <h1> {countryName} </h1>
+            <div> capital {capital} </div>
+            <div> area {countryArea} </div>
             <h3> languages: </h3>
-            <LanguageBulletPoints data={country.languages} />
+            <LanguageBulletPoints data={countryLanguage} />
             <div>
-                <img src={country.flags.png} alt="Image" />
+                <img src={countryFlagPng} alt="Image" />
+            </div>
+            <h2> Weather in {countryCapital} </h2>
+            <div>
+                <Weather lat={countryCapitalLat} lon={countryCapitalLon} />
             </div>
         </div>
     )
