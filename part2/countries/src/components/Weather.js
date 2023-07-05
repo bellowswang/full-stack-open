@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const Weather = ({ lat, lon }) => {
   const api_key = process.env.REACT_APP_API_KEY;
   const unit = 'metric';
-  const [weathers, setWeathers] = useState([]);
+  const [weathers, setWeathers] = useState({});
   const [weatherLink, setWeatherLink] = useState('');
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Weather = ({ lat, lon }) => {
   }, [lat, lon, unit, api_key]);
 
   useEffect(() => {
-    if (weathers.length > 0) {
+    if (Object.keys(weathers).length > 0) {
       setWeatherLink(
         `https://openweathermap.org/img/wn/${weathers.weather[0].icon}@2x.png`
       );
@@ -31,13 +31,13 @@ const Weather = ({ lat, lon }) => {
   console.log(lon);
   console.log(weathers);
   console.log(weatherLink);
-  console.log(weathers.length > 0 ? weathers.weather[0].icon : '');
-  console.log(weathers.length > 0 ? weathers.main.temp : '');
-  console.log(weathers.length > 0 ? weathers.wind.speed : '');
+  console.log(Object.keys(weathers).length > 0 ? weathers.weather[0].icon : '');
+  console.log(Object.keys(weathers).length > 0 ? weathers.main.temp : '');
+  console.log(Object.keys(weathers).length > 0 ? weathers.wind.speed : '');
 
   return (
     <div>
-      {weathers.length > 0 ? (
+      {Object.keys(weathers).length > 0 ? (
         <div>
           <div>temperature {weathers.main.temp} celsius</div>
           <div>
